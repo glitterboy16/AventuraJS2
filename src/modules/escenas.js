@@ -1,7 +1,6 @@
 import { rarezaAleatoria, descuentoAleatorio, EUR } from '../utils/utils.js';
 import { aplicarDescuentoPorRareza, actualizarInventario } from "./mercado.js";
 import { batalla } from "./batalla.js";
-import { Jefe } from "./enemigos.js";  
 
 export function mostrarJugador(escena, jugador) {
     const contenedorEscena1 = document.createElement("div");
@@ -54,6 +53,18 @@ export function mostrarMercado(escena, jugador) {
 
     contenedorEscena2.appendChild(divMercado);
 
+    const inventario = document.createElement("div");
+    inventario.id = "inventory-container";
+
+    for (let indice = 0; indice < 6; indice++) {
+        const casilla = document.createElement("div");
+        casilla.classList.add("item");
+        inventario.appendChild(casilla);
+    }
+
+    const casillas = inventario.querySelectorAll(".item");
+    const listaInventario = [];
+
     mercadoConDescuentos.forEach(articulo => {
         const divArticulo = document.createElement("div");
         divArticulo.classList.add("producto");
@@ -101,33 +112,36 @@ export function mostrarMercado(escena, jugador) {
         divComprar.appendChild(botonComprar);
 
         botonComprar.addEventListener("click", () => {
-            if (jugador.inventario.some(p => p.nombre === articulo.nombre)) {  
+            if (listaInventario.includes(articulo)) {
+                botonComprar.innerHTML = 'Añadir';
                 divArticulo.style.backgroundColor = "";
 
-                const pos = jugador.inventario.findIndex(p => p.nombre === articulo.nombre);
-                jugador.inventario.splice(pos, 1);
+                const pos = listaInventario.findIndex(p => p === articulo);
+                listaInventario.splice(pos, 1);
+
+                const posJug = jugador.inventario.findIndex(p => p === articulo);
+                jugador.inventario.splice(posJug, 1);
             } else {
-                if (jugador.inventario.length >= 6) {
+                if (listaInventario.length >= 6) {
                     alert("Inventario repleto. No puedes añadir más artículos.");
                     return;
                 }
 
                 botonComprar.innerHTML = 'Añadido';
                 divArticulo.style.backgroundColor = "#d4fcd4";
+                listaInventario.push(articulo);
                 jugador.añadirProducto(articulo);
             }
 
-            const casillas = document.querySelectorAll("#inventory-container .item");
-            actualizarInventario(casillas, jugador.inventario);
+            actualizarInventario(casillas, listaInventario);
         });
 
         divArticulo.append(divInfo, divComprar);
         divMercado.appendChild(divArticulo);
     });
 
+    contenedorEscena2.appendChild(inventario);
     escena.appendChild(contenedorEscena2);
-
-    mostrarInventario(escena, jugador);
 }
 
 export function mostrarEnemigos(escena, listaEnemigos, jugador) {
@@ -152,24 +166,22 @@ export function mostrarEnemigos(escena, listaEnemigos, jugador) {
         imagen.src = "imagenes/" + enemigo.imagen;
         imagen.classList.add("imgEnemigo");
 
-        
-        let nombreTexto = enemigo.nombre;
-        if (enemigo instanceof Jefe) {
-            nombreTexto += " (Jefe ❂)";
-        }
-
         const nombre = document.createElement("p");
-        nombre.innerHTML = "<strong>" + nombreTexto + "</strong>";
+        nombre.innerHTML = "<strong>" + enemigo.nombre + "</strong>";
 
         const ataque = document.createElement("p");
         ataque.innerHTML = "<em>Ataque: </em>" + enemigo.ataque;
 
         divInfo.appendChild(imagen);
         divInfo.appendChild(nombre);
+        if (enemigo.multiplicador) {
+            const jefe = document.createElement("p");
+            jefe.innerHTML = "jefe ⚠️ (Multiplicador: x" + enemigo.multiplicador + ")";
+            divInfo.appendChild(jefe);
+        }
         divInfo.appendChild(ataque);
 
-        divEnemigo.appendChild(divInfo);  
-        divEnemigos.appendChild(divEnemigo);
+        divEnemigos.appendChild(divInfo);
     });
 
     contenedorEscena4.appendChild(divEnemigos);
@@ -219,21 +231,30 @@ export function pelear(escena, listaEnemigos, jugador) {
     mostrarInventario(escena, jugador);
 }
 
-
 export function mostrarInventario(escena, jugador) {
     const inventario = document.createElement("div");
     inventario.id = "inventory-container";
 
-    
-    for (let indice = 0; indice < 6; indice++) {
+    jugador.inventario.forEach(articulo => {
+        const casilla = document.createElement("div");
+        casilla.classList.add("item");
+
+        const imagen = document.createElement("img");
+        imagen.src = "imagenes/" + articulo.imagen;
+        imagen.classList.add("imgProducto");
+
+        const nombre = document.createElement("p");
+        nombre.innerHTML = "<strong>" + articulo.nombre + "</strong>";
+
+        casilla.appendChild(imagen);
+        inventario.appendChild(casilla);
+    });
+
+    for (let i = jugador.inventario.length; i < 6; i++) {
         const casilla = document.createElement("div");
         casilla.classList.add("item");
         inventario.appendChild(casilla);
     }
-
-    // Actualiza con items reales del jugador
-    const casillas = inventario.querySelectorAll(".item");
-    actualizarInventario(casillas, jugador.inventario);
 
     escena.appendChild(inventario);
 }
