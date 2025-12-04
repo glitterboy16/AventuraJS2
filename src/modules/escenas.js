@@ -25,7 +25,7 @@ export function mostrarJugador(escena, jugador) {
     parrafoHeroe.innerHTML = "<strong><em>GUERRERO</em></strong>";
 
     const imagenHeroe = document.createElement("img");
-    imagenHeroe.src = "imagenes/prota.jpg";
+    imagenHeroe.src = "./imagenes/prota.jpg";
     imagenHeroe.classList.add("prota");
 
     const contenedorEstadisticas = document.createElement("div");
@@ -93,7 +93,7 @@ export function mostrarMercado(escena, jugador) {
         divInfo.classList.add("infoProducto");
 
         const imagen = document.createElement("img");
-        imagen.src = "imagenes/" + articulo.imagen;
+        imagen.src = "./imagenes/" + articulo.imagen;
         imagen.classList.add("imgProducto");
 
         const nombre = document.createElement("p");
@@ -192,7 +192,7 @@ export function mostrarEnemigos(escena, listaEnemigos, jugador) {
         divInfo.classList.add("infoEnemigo");
 
         const imagen = document.createElement("img");
-        imagen.src = "imagenes/" + enemigo.imagen;
+        imagen.src = "./imagenes/" + enemigo.imagen;
         imagen.classList.add("imgEnemigo");
 
         const nombre = document.createElement("p");
@@ -245,11 +245,11 @@ export function pelear(escena, listaEnemigos, jugador) {
     divPersonaje.classList.add("personajePeleaDiv");
 
     const imgEnemigo = document.createElement("img");
-    imgEnemigo.src = "imagenes/" + enemigoAleatorio.imagen;
+    imgEnemigo.src = "./imagenes/" + enemigoAleatorio.imagen;
     imgEnemigo.classList.add("imgEnemigo");
 
     const imgPersonaje = document.createElement("img");
-    imgPersonaje.src = "imagenes/prota.jpg";
+    imgPersonaje.src = "./imagenes/prota.jpg";
     imgPersonaje.classList.add("prota");
 
     divPersonaje.appendChild(imgPersonaje);
@@ -286,7 +286,7 @@ export function mostrarInventario(escena, jugador) {
         casilla.classList.add("item");
 
         const imagen = document.createElement("img");
-        imagen.src = "imagenes/" + articulo.imagen;
+        imagen.src = "./imagenes/" + articulo.imagen;
         imagen.classList.add("imgProducto");
 
         const nombre = document.createElement("p");
