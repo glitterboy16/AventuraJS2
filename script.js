@@ -3,6 +3,11 @@ import { Enemigo, Jefe } from "./modules/Enemigos.js";
 import { calcularNivel } from "./modules/Batalla.js";
 import { mostrarMercado, mostrarJugador, mostrarEnemigos, pelear, mostrarInventario } from "./modules/Escenas.js";
 
+// const nombre = document.getElementById("nombre");
+// const ataque = document.getElementById("ataque");
+// const defensa = document.getElementById("defensa");
+
+
 /**
  * @constant {HTMLElement} escena - El elemento DOM que representa la escena principal del juego.
  */
@@ -11,7 +16,11 @@ const escena = document.getElementsByClassName("scene")[0];
 /**
  * @constant {Jugador} jugador - Instancia del jugador principal del juego.
  */
-const jugador = new Jugador('Sir Elias');
+
+
+
+
+const jugador = new Jugador();
 
 mostrarJugador(escena, jugador);
 
@@ -180,7 +189,7 @@ botonReinicio.innerHTML = "Volver a empezar";
 botonPelea3.addEventListener("click", () => {
     escena.replaceChildren();
     const resultado = calcularNivel(jugador);
-    const textoPuntos = "<em>Puntos totales: </em> +" + jugador.puntos + " pts.";
+    const textoPuntos = "<em>Puntos totales: </em> +" + jugador.puntos + " pts. " + "dinero ganado" + jugador.dinero;
     const textoResultado = jugador.nombre + " es " + resultado + " 🔥 ";
     const parrafo = document.createElement('p');
     const titulo = document.createElement('h2');

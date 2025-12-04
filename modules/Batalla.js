@@ -3,6 +3,7 @@
  */
 
 import { Jefe } from "./Enemigos.js";
+import { Jugador } from "./Jugador.js";
 
 /**
  * Simula una batalla entre el jugador y un enemigo, actualizando la salud y puntos del jugador según el resultado.
@@ -19,6 +20,9 @@ export function batalla(jugador, enemigo) {
     const danoJugador = jugador.danoTotal;
     const danoEnemigo = Math.max(1, enemigo.ataque - jugador.defensaTotal);
 
+    const dineroJugador = jugador.dinero;
+    
+
     while (saludJugador > 0 && saludEnemigo > 0) {
         const turno = Math.floor(Math.random() * 2);
         if (turno === 0) {
@@ -33,8 +37,12 @@ export function batalla(jugador, enemigo) {
     if (saludJugador > 0 && saludEnemigo <= 0) {
         victoriaJugador = true;
         let basePuntos = 100 + enemigo.ataque;
+        let dineroGanadoE = 5;
+        jugador.dinero += dineroGanadoE;
+        
         if (enemigo instanceof Jefe) {
             puntosObtenidos = Math.round(basePuntos * enemigo.multiplicador);
+             
         } else {
             puntosObtenidos = basePuntos;
         }
@@ -43,7 +51,7 @@ export function batalla(jugador, enemigo) {
 
     jugador.salud = Math.max(1, saludJugador);
 
-    return `Ganador: ${victoriaJugador ? jugador.nombre : enemigo.nombre}, Puntos ganados: +${puntosObtenidos} pts`;
+    return `Ganador: ${victoriaJugador ? jugador.nombre : enemigo.nombre}, Puntos ganados: +${puntosObtenidos} pts y ahora tienes ${jugador.dinero}`;
 }
 
 /**

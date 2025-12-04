@@ -19,6 +19,7 @@ export class Jugador {
     saludMax;
     /** @property {number} salud - La salud actual del jugador. */
     salud;
+    dinero;
 
     /**
      * Crea una nueva instancia de Jugador.
@@ -32,6 +33,9 @@ export class Jugador {
         this.inventario = [];
         this.saludMax = 500;
         this.salud = this.saludMax;
+        this.dinero = 500;
+
+
     }
 
     /**
@@ -42,6 +46,7 @@ export class Jugador {
      * @returns {void}
      */
     añadirProducto(articulo) {
+        
         this.inventario.push(structuredClone(articulo));
     }
 
@@ -88,6 +93,7 @@ export class Jugador {
         ✧ <strong>Nombre:</strong> ${this.nombre}<br>
         ❂ <strong>Vida:</strong> ${this.salud}/${this.saludMax}<br>
         ✦ <strong>Puntos de Gracia:</strong> ${this.puntos}<br>
+        <strong>dinero:</strong> ${this.dinero}<br>
         ⚔ <strong>Poder de Ataque:</strong> ${this.danoTotal}<br>
         ⛨ <strong>Defensa Total:</strong> ${this.defensaTotal}<br>
         ☉ <strong>Inventario:</strong> ${
@@ -98,4 +104,15 @@ export class Jugador {
         `;
     }
 
+    mostrarDinero() {
+        return `
+        <strong>dinero:</strong> ${this.dinero}<br>
+ 
+        `;
+    }
+
 }
+
+
+
+//  divEstadisticas.innerHTML = jugador.mostrarJugador();

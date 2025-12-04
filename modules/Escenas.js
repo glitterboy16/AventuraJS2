@@ -65,6 +65,7 @@ export function mostrarMercado(escena, jugador) {
     contenedorEscena2.classList.add("scene-2-container");
 
     const divMercado = document.createElement("div");
+ 
     divMercado.classList.add("mercado");
 
     const rarezaSeleccionada = rarezaAleatoria();
@@ -91,6 +92,7 @@ export function mostrarMercado(escena, jugador) {
 
         const divInfo = document.createElement("div");
         divInfo.classList.add("infoProducto");
+        divInfo.innerHTML = jugador.mostrarDinero();
 
         const imagen = document.createElement("img");
         imagen.src = "./imagenes/" + articulo.imagen;
@@ -261,6 +263,7 @@ export function pelear(escena, listaEnemigos, jugador) {
     const parrafoResultado = document.createElement("h2");
     parrafoResultado.classList.add('resultado');
     parrafoResultado.innerHTML = resultado;
+    
 
     contenedorEscena5.appendChild(parrafoResultado);
     contenedorEscena5.appendChild(divPelea);

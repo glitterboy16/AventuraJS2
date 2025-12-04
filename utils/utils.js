@@ -43,3 +43,8 @@ export function descuentoAleatorio() {
 export function mostrarArray(lista, funcionMostrar) {
     lista.forEach(item => console.log(funcionMostrar(item)));
 }
+
+export const regexName = /^.{3,}$/;
+export const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])\S{8,}$/;
+export const regexPhone = /^\d{9}$/;
+export const regexCode = /^\d{5}$/;
