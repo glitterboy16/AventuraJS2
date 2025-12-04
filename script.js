@@ -1,7 +1,7 @@
-import { Jugador } from "./modules/jugador.js";
-import { Enemigo, Jefe } from "./modules/enemigos.js";  
+import { Jugador } from "./modules/Jugador.js";
+import { Enemigo, Jefe } from "./modules/Enemigos.js";  
 import { calcularNivel } from "./modules/Batalla.js";
-import { mostrarMercado, mostrarJugador, mostrarEnemigos, pelear, mostrarInventario } from "./modules/escenas.js";
+import { mostrarMercado, mostrarJugador, mostrarEnemigos, pelear, mostrarInventario } from "./modules/Escenas.js";
 
 /**
  * @constant {HTMLElement} escena - El elemento DOM que representa la escena principal del juego.

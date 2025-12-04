@@ -2,7 +2,7 @@
  * @module batalla
  */
 
-import { Jefe } from "./enemigos.js";
+import { Jefe } from "./Enemigos.js";
 
 /**
  * Simula una batalla entre el jugador y un enemigo, actualizando la salud y puntos del jugador según el resultado.

@@ -3,7 +3,7 @@
  */
 
 
-import { Producto } from "./producto.js";
+import { Producto } from "./Producto.js";
 
 /**
  * @constant {Producto[]} mercado - Array que representa el mercado de productos disponibles.

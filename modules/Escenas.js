@@ -3,7 +3,7 @@
  */
 
 import { rarezaAleatoria, descuentoAleatorio, EUR } from '../utils/utils.js';
-import { aplicarDescuentoPorRareza, actualizarInventario } from "./mercado.js";
+import { aplicarDescuentoPorRareza, actualizarInventario } from "./Mercado.js";
 import { batalla } from "./Batalla.js";
 
 /**
