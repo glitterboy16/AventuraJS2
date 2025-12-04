@@ -1,0 +1,365 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    
+    --color-fondo: #060608;                  
+    --color-panel: #0f0f10;                  
+    --color-panel-secundario: rgba(16,16,16,0.85); 
+    --color-acentuado: #d4af37;              
+    --color-acentuado-transparente: rgba(212,175,55,0.12); 
+    --color-texto: #e6e6e6;                  
+    --color-texto-secundario: #9a9a9a;       
+    --color-efecto-vidrio: rgba(255,255,255,0.03); 
+
+    
+    --transicion: all 260ms cubic-bezier(.2,.8,.2,1); 
+    --espaciado: 1rem;                       
+    --radio-borde: 4px;                      
+    --sombra: 0 4px 12px rgba(0,0,0,0.5);   
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Cinzel', 'Averia Serif Libre', serif;
+    color: var(--color-texto);
+
+    background: url('imagenes/f.jpg') no-repeat center/cover;
+    overflow-x: hidden;  
+}
+
+/* Contenedor principal */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background: transparent;    
+    border-bottom: none;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.logo {
+    max-width: 250px;
+    height: auto;
+}
+
+/* Main / escena */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.scene {
+    flex: 1;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado);
+    width: 100%;
+    max-width: 100vw;
+}
+
+
+button {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--color-texto);
+    border: 1.8px solid rgba(212,175,55,0.95); 
+    border-radius: calc(var(--radio-borde));
+    cursor: pointer;
+    transition: var(--transicion);
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    box-shadow: var(--sombra);
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.02);
+    background: linear-gradient(180deg, var(--color-acentuado-transparente), rgba(212,175,55,0.02));
+    color: #fff;
+}
+
+.panel {
+    background: var(--color-panel-secundario);
+    border-radius: var(--radio-borde);
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: var(--sombra);
+    padding: 0.8rem;
+}
+
+/* ESCENA 1 - JUGADOR */
+.scene-1-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.prota {
+    max-width: 170px;
+    border-radius: calc(var(--radio-borde));
+    box-shadow: var(--sombra);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
+    padding: 0.2rem;
+}
+
+.parametros {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.35));
+    padding: 0.9rem;
+    border-radius: calc(var(--radio-borde));
+    line-height: 1.5;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* ESCENA 2 - MERCADO */
+.scene-2-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    max-height: 90vh;
+    padding-bottom: 3rem;
+}
+
+.mercado {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 0.6rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem;
+    flex: 1;                          
+    overflow-y: scroll;                 
+}
+
+.productoConDescuento {
+    animation: pulso 2s infinite;
+}
+
+.producto {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.38));
+    border: 1.6px solid var(--color-acentuado);
+    border-radius: calc(var(--radio-borde));        
+    padding: 0.5rem;
+    text-align: center;
+    transition: var(--transicion);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.65), 0 1px 0 rgba(212,175,55,0.02) inset;
+    color: var(--color-texto);
+}
+
+.producto:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.7), 0 0 18px var(--color-acentuado-transparente);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.45));
+}
+
+
+.imgProducto {
+    width: 100%;
+    max-width: 150px;
+}
+
+
+.descuento {
+    background: rgba(180,30,30,0.95);
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 700;
+    max-width: 50vh;
+    font-size: 0.85rem;
+    display: flex;
+    
+}
+
+
+
+/* INVENTARIO */
+#inventory-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(62px, 1fr));
+    gap: 0.3rem;
+    padding: 0.8rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.45));
+    border-radius: calc(var(--radio-borde));
+    border: 1px solid var(--color-acentuado);
+    margin: 1rem 4%;
+    place-items: center;
+    overflow: visible;
+}
+
+.item {
+    width: 100%;
+    max-width: 88px;
+    aspect-ratio: 1 / 1;
+    border: 1.6px solid rgba(255,255,255,0.06);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.28));
+    overflow: hidden;
+    transition: var(--transicion);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+}
+
+.item:hover {
+    transform: scale(1.07);
+    border-color: var(--color-acentuado);
+    z-index: 2;
+}
+
+.item img {
+    max-width: 84%;
+    max-height: 84%;
+    object-fit: contain;
+}
+
+/* ESCENA 4 - ENEMIGOS */
+.scene-4-container {
+    height: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+
+.enemigos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.enemigo {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.45));
+    border: 1.5px solid rgba(255,255,255,0.03);
+    border-radius: calc(var(--radio-borde));
+    padding: 1rem;
+    text-align: center;
+    transition: var(--transicion);
+}
+
+.enemigo:hover {
+    transform: translateY(-6px) scale(1.02);
+    background: linear-gradient(180deg, var(--color-acentuado-transparente), rgba(0,0,0,0.5));
+    box-shadow: 0 16px 34px rgba(0,0,0,0.7);
+}
+
+.imgEnemigo {
+    width: 100%;
+    max-width: 160px;
+    border-radius: 5%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(255,255,255,0.01));
+    padding: 6px;
+}
+
+/* ESCENA 5 - BATALLA */
+.pelea {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    height: 100%;
+}
+
+.personajePeleaDiv {
+    animation: enteradaJugador 1s ease-out forwards;
+}
+
+.enemigoPeleaDiv {
+    animation: entradaEnemigo 1s ease-out forwards;
+}
+
+.personajePeleaDiv img,
+.enemigoPeleaDiv img {
+    max-width: 220px;
+    border-radius: 5%;
+    box-shadow: var(--sombra);
+    animation: show 1s ease-out;
+}
+
+.resultado {
+    font-size: 2rem;
+    text-align: center;
+    margin: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ==================== ANIMACIONES ==================== */
+@keyframes pulso {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(0);
+    filter: blur(2px);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.15) translateY(-50px);
+    filter: none;
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(0.9) translateY(0);
+  }
+}
+
+@keyframes enteradaJugador {
+  0% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes entradaEnemigo {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+/* ------------------- MEDIA QUERIES ------------------- */
+@media (max-width: 480px) {
+    .scene { padding: 0.5rem; }
+    button { font-size: 1rem; padding: 0.7rem; }
+    .prota, .imgProducto, .imgEnemigo { max-width: 120px; }
+    .mercado { grid-template-columns: 1fr; } 
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .mercado { grid-template-columns: repeat(2, 1fr); } 
+}
+
+@media (min-width: 1037px) {
+    .scene { max-width: 1000px; margin: 0 auto; }
+    .mercado { grid-template-columns: repeat(3, 1fr); } 
+}
+
+/* ------------------- FIN ------------------- */
